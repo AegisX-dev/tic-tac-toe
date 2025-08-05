@@ -7,29 +7,94 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main">
-        <div class="logo">TIC-TAC-TOE</div>
-        <div class="result">Player X's Turn</div>
-        <div class="game">
-            <div class="cell" data-index="0"></div>
-            <div class="cell" data-index="1"></div>
-            <div class="cell" data-index="2"></div>
-            <div class="cell" data-index="3"></div>
-            <div class="cell" data-index="4"></div>
-            <div class="cell" data-index="5"></div>
-            <div class="cell" data-index="6"></div>
-            <div class="cell" data-index="7"></div>
-            <div class="cell" data-index="8"></div>
+    <!-- Game Mode Selection -->
+    <div id="mode-selection" class="mode-selection">
+        <div class="mode-title">Choose Game Mode</div>
+        <div class="mode-options">
+            <button id="pvp-mode" class="mode-btn">Player vs Player</button>
+            <button id="pvc-mode" class="mode-btn">Player vs Computer</button>
         </div>
-        <div class="wins-x">Player X Wins: 0</div>
-        <div class="wins-o">Player O Wins: 0</div>
-        <div class="new-game">
-            <button id="new-game-btn" class="button">New Game</button>
+        <div id="difficulty-selection" class="difficulty-selection hidden">
+            <div class="difficulty-title">Select Difficulty</div>
+            <div class="difficulty-options">
+                <button id="easy-btn" class="difficulty-btn">Easy</button>
+                <button id="medium-btn" class="difficulty-btn">Medium</button>
+                <button id="hard-btn" class="difficulty-btn">Hard</button>
+                <button id="impossible-btn" class="difficulty-btn">Impossible</button>
+            </div>
         </div>
-        <div class="new-round">
-            <button id="new-round-btn" class="button">New Round</button>
+        <div class="theme-selection">
+            <div class="theme-title">Choose Theme</div>
+            <div class="theme-options">
+                <button id="theme-blue" class="theme-btn active" data-theme="blue">Ocean</button>
+                <button id="theme-purple" class="theme-btn" data-theme="purple">Galaxy</button>
+                <button id="theme-green" class="theme-btn" data-theme="green">Forest</button>
+                <button id="theme-red" class="theme-btn" data-theme="red">Sunset</button>
+            </div>
         </div>
     </div>
+
+    <!-- Main Game -->
+    <div id="main-game" class="main hidden">
+        <div class="game-header">
+            <div class="logo">TIC-TAC-TOE</div>
+            <div class="game-info">
+                <div class="result">Player X's Turn</div>
+                <div class="game-mode-display">Player vs Player</div>
+            </div>
+            <div class="settings-btn">
+                <button id="settings-btn" class="button">🔊</button>
+            </div>
+        </div>
+        
+        <div class="game-container">
+            <div class="game-board">
+                <div class="game">
+                    <div class="cell" data-index="0"></div>
+                    <div class="cell" data-index="1"></div>
+                    <div class="cell" data-index="2"></div>
+                    <div class="cell" data-index="3"></div>
+                    <div class="cell" data-index="4"></div>
+                    <div class="cell" data-index="5"></div>
+                    <div class="cell" data-index="6"></div>
+                    <div class="cell" data-index="7"></div>
+                    <div class="cell" data-index="8"></div>
+                </div>
+            </div>
+            
+            <div class="game-sidebar">
+                <div class="score-board">
+                    <div class="wins-x">Player X: 0</div>
+                    <div class="wins-o">Player O: 0</div>
+                    <div class="ties">Ties: 0</div>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="new-round-btn" class="button">New Round</button>
+                    <button id="new-game-btn" class="button">New Game</button>
+                    <button id="back-to-menu-btn" class="button">Back to Menu</button>
+                </div>
+                
+                <div class="tournament-mode">
+                    <div class="tournament-title">Tournament Mode</div>
+                    <div class="tournament-options">
+                        <button id="best-of-3" class="tournament-btn">Best of 3</button>
+                        <button id="best-of-5" class="tournament-btn">Best of 5</button>
+                        <button id="best-of-7" class="tournament-btn">Best of 7</button>
+                    </div>
+                    <div id="tournament-status" class="tournament-status hidden"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="move-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PC=" type="audio/wav">
+    </audio>
+    <audio id="win-sound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PCucBsUOJHO8NiHNwkZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwGJHfH8N2QQAoUXrTp66hVFApGn+DyvWMLEEyr5PC=" type="audio/wav">
+    </audio>
     <script src="script.js"></script>
 </body>
 </html>
